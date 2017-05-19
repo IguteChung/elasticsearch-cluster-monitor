@@ -1,0 +1,21 @@
+body {
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+table, th, td {
+  border: 1px solid black;
+  text-align: center;
+}
+
+table {
+  width: 100%;
+}
+
+.ok {
+  color: green;
+}
+
+.warn {
+  color: red;
+}

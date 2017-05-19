@@ -1,0 +1,52 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: es-web
+  labels:
+    app: es-web
+    tier: web
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    name: http
+    targetPort: 8080
+  selector:
+    app: es-web
+    tier: web
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: es-web
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: es-web
+        tier: web
+    spec:
+      containers:
+      - name: es-web
+        image: {image}
+        imagePullPolicy: Always
+        command:
+          - "/bin/sh"
+          - "-c"
+          - "npm run start -- --es-host=http://elasticsearch-v5:9200"
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        env:
+        - name: GET_HOSTS_FROM
+          value: dns
+        ports:
+          - containerPort: 8080
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 30
+          timeoutSeconds: 5

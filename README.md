@@ -14,6 +14,12 @@ $ npm install
 $ npm run start
 ```
 
+# Container
+
+```sh
+docker pull frank310751/elasticsearch-cluster-monitor:v1.0.0
+```
+
 ## License
 
 MIT

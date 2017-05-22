@@ -18,7 +18,7 @@ server.get('/', (req, res) => {
 
       res.send(template({
         body: appString,
-        title: 'Hello World from the server'
+        title: 'Elasticsearch cluster monitor'
       }));
     })
     .catch(err => res.status(500).send({ error: `Something wrong! ${err}` }));
